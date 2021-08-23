@@ -1,0 +1,17 @@
+#postsUL {
+    list-style: none;
+    margin: 2%
+}
+
+body {
+    background-color: burlywood;
+}
+
+.blogPostForm {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.pageTitle{
+    text-align: center;
+}
