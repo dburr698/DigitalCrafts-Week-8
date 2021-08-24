@@ -10,7 +10,7 @@
     <body>
         <h1 class="pageTitle">Travel Blog</h1>
 
-        <form class="blogPostForm" method="POST" action="/add-post">
+        <form class="blogPostForm" method="POST" action="travelBlog/add-post">
             <div class="form-group">
                 <label for="title">Title:</title>
                 <input name='title' class="form-control">
@@ -26,8 +26,9 @@
             {{#posts}}
                 
                 <li>
-                    <form method="POST" action="/delete-post">
+                    <form method="POST" action="travelBlog/delete-post">
                         <h2>{{title}}:</h2>
+                        <b>{{date_updated}}</b>
                         <p>{{body}}</p>
                         <input type="hidden" name="post_id" value={{post_id}}>
                         <button>Delete</button>
