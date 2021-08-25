@@ -1,7 +1,16 @@
 const express = require('express')
 const app = express()
 
+// require and configure dotenv
+require('dotenv').config()
+
+// create path for partials
+const path = require('path')
+const VIEWS_PATH = path.join(__dirname, '/views')
+
 const session = require('express-session')
+
+global.bcrypt = require('bcryptjs')
 
 const authenticate = require('./authenticate/authenticateMiddleware')
 
@@ -13,10 +22,10 @@ const blogRouter = require('./routes/blogPost')
 const mustacheExpress = require('mustache-express')
 
 // setting up Express to use Mustache Express as template pages
-app.engine('mustache', mustacheExpress())
+app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 
 // pages are located in views directory 
-app.set('views', './views')
+app.set('views', VIEWS_PATH)
 
 // extenstions will be mustache
 app.set('view engine', 'mustache')

@@ -1,15 +1,7 @@
 const express = require('express')
 const router = express()
 
-var bcrypt = require('bcryptjs')
-
-// initialaize pg promise
-const pgp = require('pg-promise')()
-
-const connectionString = 'postgres://jljiweil:sdkd_pYcirHswK3wEg5PDoEuGxfrDkXX@chunee.db.elephantsql.com/jljiweil'
-
-// use connectionString to create pg-promise object
-const db = pgp(connectionString)
+const models = require('../models')
 
 router.get('/', (req, res) => {
     res.render('register')
@@ -23,10 +15,18 @@ router.post('/sign-up', (req, res) => {
         if(!error) {
             bcrypt.hash(password, salt, function(error, hash) {
                 if(!error) {
-                    db.none('INSERT INTO users(username, password) VALUES($1, $2)', [username, hash])
-                    .then(() => {
+                    // create user object
+                    const user = models.User.build({
+                        username: username,
+                        password: hash
+                    })
+                    // save user
+                    user.save()
+                    .then(savedUser => {
+                        console.log("User added")
                         res.redirect('/')
                     })
+
                 } else {
                     res.send('Error occured')
                 }
