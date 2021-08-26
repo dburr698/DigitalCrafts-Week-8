@@ -9,10 +9,16 @@ router.get('/', (req, res) => {
     models.Post.findAll({
         where: {
             user_id: userId
-        }
+        },
+        include: [
+            {
+                model: models.Comment,
+                as: 'comments'
+            }
+        ]
     })
     .then(posts => {
-        res.render('blog', {posts: posts})
+        res.render('blog', {posts: posts, comments: posts.comments})
     })
 })
 
@@ -46,5 +52,20 @@ router.post('/delete-post', (req, res) => {
     })
 })
 
+router.post('/add-comment', (req, res) => {
+    const commentTitle = req.body.commentTitle
+    const commentBody = req.body.commentBody
+    const postId = req.body.postId
+
+    const comment = models.Comment.build({
+        title: commentTitle,
+        body: commentBody,
+        post_id: postId
+    })
+    comment.save()
+    .then(() => {
+        res.redirect('/travelBlog')
+    })
+})
 
 module.exports = router

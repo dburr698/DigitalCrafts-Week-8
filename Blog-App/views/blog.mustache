@@ -8,6 +8,11 @@
         <link rel="stylesheet" href="/css/blog.css">
     </head>
     <body>
+        
+        <div class="menu">
+            {{>menu}}
+        </div>
+
         <h1 class="pageTitle">Travel Blog</h1>
 
         <form class="blogPostForm" method="POST" action="travelBlog/add-post">
@@ -25,7 +30,7 @@
         <ul id="postsUL">
             {{#posts}}
                 
-                <li>
+                <li class="postLI">
                     <form method="POST" action="travelBlog/delete-post">
                         <h2>{{title}}:</h2>
                         <b>{{updatedAt}}</b>
@@ -33,6 +38,21 @@
                         <input type="hidden" name="post_id" value={{id}}>
                         <button>Delete</button>
                     </form>
+                    <form method="POST" action="travelBlog/add-comment" class="commentForm">
+                        <input type="text" name="commentTitle" placeholder="Title">
+                        <input type="text" name="commentBody" placeholder="Body">
+                        <input type="hidden" name=postId value={{id}}>
+                        <button type="submit">Add Comment</button>
+                     </form>
+                    <ul class="commentsUL">
+                        {{#comments}}
+                            <li class="commentLI">
+                                <b>{{title}}</b>
+                                <p>{{body}}</b>
+                            </li>
+                        {{/comments}}
+                    </ul>
+                    
                 </li>
                 
             {{/posts}}

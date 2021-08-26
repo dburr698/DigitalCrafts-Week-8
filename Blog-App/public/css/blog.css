@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: burlywood;
+    background-color: #dedbdb !important;
 }
 
 .blogPostForm {
@@ -14,4 +14,30 @@ body {
 
 .pageTitle{
     text-align: center;
+}
+
+.menu {
+    height: 75px;
+}
+
+.commentLI{
+    list-style: none;
+    background-color: #0b6efd;
+    color: white;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: fit-content;
+}
+
+.postLI{
+    background-color: white;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.commentForm {
+    margin: 10px;
 }
